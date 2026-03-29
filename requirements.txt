@@ -2,6 +2,7 @@ langchain
 python-dotenv
 ipykernel
 langchain-community
+langchain-core
 pypdf
 bs4
 arxiv
@@ -10,3 +11,5 @@ wikipedia
 langchain-text-splitters
 langchain-groq
 langchain_huggingface
+langchain-ollama
+faiss-cpu
