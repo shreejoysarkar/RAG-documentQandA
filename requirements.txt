@@ -5,7 +5,7 @@ python-multipart
 
 # LangChain & AI
 langchain
-langchain-openai
+langchain-google-genai
 langchain-qdrant
 langchain-community
 langchain-text-splitters

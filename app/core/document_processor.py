@@ -143,6 +143,48 @@ class DocumentProcessor:
 
         return loader[extension](file_path)
     
+    def load_from_upload(
+        self,
+        file: BinaryIO,
+        filename: str,
+    ) -> list[Document]:
+        """Load document from uploaded file.
+
+        Args:
+            file: File-like object
+            filename: Original filename
+
+        Returns:
+            List of Document objects
+        """
+        extension = Path(filename).suffix.lower()
+
+        if extension not in self.SUPPORTED_EXTENSIONS:
+            raise ValueError(
+                f"Unsupported file extension: {extension}. "
+                f"Supported: {self.SUPPORTED_EXTENSIONS}"
+            )
+
+        # Save to temporary file for processing
+        with tempfile.NamedTemporaryFile(
+            delete=False,
+            suffix=extension,
+        ) as tmp_file:
+            tmp_file.write(file.read())
+            tmp_path = tmp_file.name
+
+        try:
+            documents = self.load_file(tmp_path)
+
+            # Update metadata with original filename
+            for doc in documents:
+                doc.metadata["source"] = filename
+
+            return documents
+        finally:
+            # Clean up temp file
+            Path(tmp_path).unlink(missing_ok=True)
+
 
     def split_documents(self, documents : list[Document]) -> list[Document]:
         """split documents into chunks
@@ -192,7 +234,7 @@ class DocumentProcessor:
         """
 
         document = self.load_from_upload(file, filename)
-        return self.split_documents(documents)
+        return self.split_documents(document)
     
 
 
