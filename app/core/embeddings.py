@@ -10,7 +10,7 @@ from app.utils.logger import get_logger
 logger = get_logger(__name__)
 
 @lru_cache
-def get_embeddings() -> GeminiEmbeddings:
+def get_embeddings() -> GoogleGenerativeAIEmbeddings:
     """Get an instance of the GeminiEmbeddings class."""
     
     settings = get_settings()
