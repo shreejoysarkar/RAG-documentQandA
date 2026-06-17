@@ -60,7 +60,6 @@ class VectorStoreService:
             client=self.client,
             collection_name=self.collection_name,
             embedding=self.embeddings,
-            
         )
 
         logger.info(f"VectorStoreService initialized for collection: {self.collection_name}")

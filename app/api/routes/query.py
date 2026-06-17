@@ -12,7 +12,7 @@ from app.api.schemas import (
     QueryResponse,
     SourceDocument,
 )
-from app.core.rag_chain import RAGChain
+from app.core.rag_chain import RagChain
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)

@@ -17,7 +17,7 @@ from app.config import get_settings
 from app.utils.logger import get_logger, setup_logging
 
 settings = get_settings()
-
+1
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -67,8 +67,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
-#iapp.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Include routers
 app.include_router(health.router)
@@ -76,12 +74,14 @@ app.include_router(documents.router)
 app.include_router(query.router)
 
 
-@app.get("/", response_class=HTMLResponse, tags=["Root"])
-async def root():
-    """Serve the main UI."""
-    with open("static/index.html", "r") as f:
-        return f.read()
-
+@app.get("/", tags = ["Root"])
+async def read_root():
+    """Root endpoint."""
+    return {
+        "message" : f"Welcome to {settings.app_name}",
+        "version" : __version__,
+        "docs":"/docs",
+        }
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
