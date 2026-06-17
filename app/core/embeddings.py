@@ -18,7 +18,7 @@ def get_embeddings() -> GoogleGenerativeAIEmbeddings:
 
     embeddings = GoogleGenerativeAIEmbeddings(
         model = settings.embedding_model,
-        gemini_api_key = settings.GEMINI_API_KEY,
+        google_api_key = settings.GEMINI_API_KEY,
     )
 
     logger.info("GeminiEmbeddings initialized successfully")

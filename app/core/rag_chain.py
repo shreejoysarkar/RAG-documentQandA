@@ -57,7 +57,7 @@ class RagChain:
         self.llm = ChatGoogleGenerativeAI(
             model = settings.llm_model,
             temperature = settings.llm_temperature,
-            google_api_key = settings.google_api_key
+            google_api_key = settings.GEMINI_API_KEY
         )
 
         ## Initialize prompt

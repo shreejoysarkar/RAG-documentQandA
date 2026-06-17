@@ -1,5 +1,11 @@
 """FastAPI application entry point."""
 
+import sys
+from pathlib import Path
+
+# Add the project root to the Python path to allow direct execution
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,7 +23,6 @@ from app.config import get_settings
 from app.utils.logger import get_logger, setup_logging
 
 settings = get_settings()
-1
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

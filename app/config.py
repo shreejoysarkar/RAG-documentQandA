@@ -60,4 +60,11 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     """Get cached settings instance."""
-    return Settings()
+    import os
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
+    settings = Settings()
+    # Force google-genai to use the correct API key from .env
+    # otherwise it may prioritize an expired GOOGLE_API_KEY from the system env vars.
+    os.environ["GOOGLE_API_KEY"] = settings.GEMINI_API_KEY
+    return settings
