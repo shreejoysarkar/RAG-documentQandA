@@ -5,7 +5,7 @@ import time
 from typing import Any
 
 from datasets import Dataset
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from ragas import evaluate
 from ragas.metrics import answer_relevancy, faithfulness
 
@@ -36,7 +36,7 @@ class RAGASEvaluator:
         eval_embedding_model = self.settings.ragas_embedding_model or self.settings.embedding_model
 
         # Initialize LLM for evaluation
-        self.llm = GoogleGenerativeAIEmbeddings(
+        self.llm = ChatGoogleGenerativeAI(
             model=eval_llm_model,
             temperature=eval_llm_temperature,
             google_api_key=self.settings.GEMINI_API_KEY,

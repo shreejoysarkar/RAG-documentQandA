@@ -38,7 +38,7 @@ async def query(request: QueryRequest) -> QueryResponse:
     start_time = time.time()
 
     try:
-        rag_chain = RAGChain()
+        rag_chain = RagChain()
 
         # Determine which method to call based on request
         if request.enable_evaluation:
@@ -116,7 +116,7 @@ async def query_stream(request: QueryRequest) -> StreamingResponse:
     logger.info(f"Streaming query received: {request.question[:100]}...")
 
     try:
-        rag_chain = RAGChain()
+        rag_chain = RagChain()
 
         async def generate():
             """Generate streaming response."""

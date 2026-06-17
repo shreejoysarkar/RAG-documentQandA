@@ -42,7 +42,7 @@ def format_docs(docs: list[Document]) -> str:
 
 class RagChain:
     """Rag Chain for question answering"""
-    def _init__(self, vector_store_service: VectorStoreService | None = None):
+    def __init__(self, vector_store_service: VectorStoreService | None = None):
         """Initilize RAG Chain.
         ARgs:
             vector_store_service : Optional VectorStoreService instance
